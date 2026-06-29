@@ -24,3 +24,8 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# SQLite database (local data)
+leave.db
+leave.db-wal
+leave.db-shm

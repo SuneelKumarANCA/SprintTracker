@@ -33,35 +33,39 @@ export default defineConfig(({ mode }) => {
       proxy: {
         ...(jiraBase
           ? {
-              "/jira-api": {
-                target: jiraBase,
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/jira-api/, ""),
-                secure: true,
-              },
-            }
+            "/jira-api": {
+              target: jiraBase,
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/jira-api/, ""),
+              secure: true,
+            },
+          }
           : {}),
         ...(confluenceBase
           ? {
-              "/confluence-api": {
-                target: confluenceBase,
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/confluence-api/, ""),
-                secure: true,
-              },
-            }
+            "/confluence-api": {
+              target: confluenceBase,
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/confluence-api/, ""),
+              secure: true,
+            },
+          }
           : {}),
         ...(tempoToken
           ? {
-              "/tempo-api": {
-                target: "https://api.tempo.io",
-                changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/tempo-api/, ""),
-                secure: false,
-                headers: { Authorization: `Bearer ${tempoToken}` },
-              },
-            }
+            "/tempo-api": {
+              target: "https://api.tempo.io",
+              changeOrigin: true,
+              rewrite: (path) => path.replace(/^\/tempo-api/, ""),
+              secure: false,
+              headers: { Authorization: `Bearer ${tempoToken}` },
+            },
+          }
           : {}),
+        "/api/leave": {
+          target: "http://localhost:3001",
+          changeOrigin: true,
+        },
       },
     },
   };

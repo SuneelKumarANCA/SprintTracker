@@ -8,6 +8,7 @@ import express from 'express';
 import cors from 'cors';
 import { readFileSync } from 'fs';
 import pino from 'pino';
+import leaveRoutes from './server/routes/leaveRoutes.js';
 
 const MODELS_API_URL = 'https://models.inference.ai.azure.com/chat/completions';
 const ENV_PATH = new URL('.env', import.meta.url);
@@ -105,6 +106,8 @@ app.post('/api/retrospective', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+app.use('/api/leave', leaveRoutes);
 
 app.get('/api/health', (_req, res) => {
   const token = getEnvVar('VITE_GITHUB_TOKEN');
